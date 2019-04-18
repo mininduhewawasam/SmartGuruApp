@@ -1,10 +1,7 @@
-#import argparse
-
 from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
-#import urllib.parse as urlparse
 
-DEVELOPER_KEY = 'AIzaSyA3vPlQVS46IOVjEKln3QkeRtVtctnSHhk'
+
+DEVELOPER_KEY = 'AIzaSyDA5kX9JmNtuCOc2oJ_A7lgbMX0Qepo0Bo'
 YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
 
@@ -16,7 +13,7 @@ def search_by_keyword(search_term):
         q=search_term,
         part='id,snippet',
         maxResults=10,
-        relevenceLanguage='en'
+        relevanceLanguage='en'
     ).execute()
 
     videos = []
@@ -27,7 +24,8 @@ def search_by_keyword(search_term):
 
     print('Videos:\n', '\n'.join(videos), '\n')
 
-    return videos[0]
+
+    return videos
 
 
 def get_comments(video_id):
@@ -48,11 +46,20 @@ def get_comments(video_id):
 
 
         if result['kind'] == 'youtube#commentThread':
-            comments.append('%d %s' % (i, result['snippet']['topLevelComment']['snippet']['textOriginal']))
+            comments.append('%d %s' % (i,
+                                        result['snippet']['topLevelComment']['snippet']['textOriginal']))
             i += 1
 
 
 
     # print('Comments:\n', '\n'.join(comments), '\n')
 
+
+
     return comments
+
+
+
+
+
+
