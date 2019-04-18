@@ -42,12 +42,9 @@ def get_comments(video_id):
 
 
     for result in results.get('items', []):
-
-
         if result['kind'] == 'youtube#commentThread':
-            comments.append('%d %s' % (i,
-                                        result['snippet']['topLevelComment']['snippet']['textOriginal']))
+            comments.append('%d %s' % (i,result['snippet']['topLevelComment']['snippet']['textOriginal']))
             i += 1
-
+    return comments
 
 
