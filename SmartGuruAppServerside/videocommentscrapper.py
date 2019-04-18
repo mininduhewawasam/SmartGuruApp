@@ -1,9 +1,5 @@
 from googleapiclient.discovery import build
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 79e246a4e19b4046fd07730324ac8ad8c63cced9
 DEVELOPER_KEY = 'AIzaSyDA5kX9JmNtuCOc2oJ_A7lgbMX0Qepo0Bo'
 YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
@@ -52,22 +48,6 @@ def get_comments(video_id):
             comments.append('%d %s' % (i,
                                         result['snippet']['topLevelComment']['snippet']['textOriginal']))
             i += 1
-
-<<<<<<< HEAD
-
-
-    # print('Comments:\n', '\n'.join(comments), '\n')
-
-
-
-=======
-    # print('Comments:\n', '\n'.join(comments), '\n')
-
->>>>>>> 79e246a4e19b4046fd07730324ac8ad8c63cced9
-    return comments
-
-
-
 
 
 
