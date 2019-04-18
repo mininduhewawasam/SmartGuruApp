@@ -1,10 +1,6 @@
 import pandas as pd
 from sqlalchemy import create_engine
 
-
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import linear_kernel
-#
 db_connection = 'mysql+pymysql://root:@localhost/test'
 
 conn = create_engine(db_connection)
@@ -16,11 +12,7 @@ print(metadata.head(2))
 
 features = ['question', 'chapter', 'topic']
 
-from ast import literal_eval
 
-# features = ['question', 'chapter', 'topic']
-# for feature in features:
-#     metadata[feature] = metadata[feature].apply(literal_eval)
 
 print(metadata[['question', 'chapter', 'topic']].head(3))
 
