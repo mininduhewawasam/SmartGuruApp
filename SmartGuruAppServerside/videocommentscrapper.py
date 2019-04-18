@@ -1,6 +1,5 @@
 from googleapiclient.discovery import build
 
-
 DEVELOPER_KEY = 'AIzaSyDA5kX9JmNtuCOc2oJ_A7lgbMX0Qepo0Bo'
 YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
