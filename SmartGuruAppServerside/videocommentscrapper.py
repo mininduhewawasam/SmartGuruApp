@@ -50,11 +50,7 @@ def get_comments(video_id):
                                         result['snippet']['topLevelComment']['snippet']['textOriginal']))
             i += 1
 
-
-
     # print('Comments:\n', '\n'.join(comments), '\n')
-
-
 
     return comments
 
