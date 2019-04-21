@@ -14,6 +14,8 @@ metadata = pd.read_sql("select * from questions", conn)
 
 print(metadata.head(2))
 
+print("new commit")
+
 features = ['question', 'chapter', 'topic']
 
 from ast import literal_eval
