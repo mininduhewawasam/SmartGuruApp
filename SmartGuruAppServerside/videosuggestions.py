@@ -1,4 +1,4 @@
-import videocommentscrapper as a
+import youtubecommentscrapper as a
 from nltk.sentiment import SentimentIntensityAnalyzer
 from googleapiclient.errors import HttpError
 
