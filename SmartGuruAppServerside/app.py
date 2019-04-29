@@ -1,11 +1,12 @@
 from flask import Flask
+from SmartGuruAppServerside import recQuizGenerator
 
 app = Flask(__name__)
 
 
 @app.route('/hello')
 def hello_world():
-    return 'Hello nipun!ssss4'
+    return recQuizGenerator.sendQuestions()
 
 
 if __name__ == '__main__':
