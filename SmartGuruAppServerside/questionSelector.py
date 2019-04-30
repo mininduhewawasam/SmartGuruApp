@@ -15,7 +15,7 @@ db_connection = 'mysql+pymysql://u2oI1tyJuT:joBxFoudcl@www.remotemysql.com/u2oI1
 conn = create_engine(db_connection)
 metadata = pd.read_sql("select * from questions", conn)
 
-features = ['question', 'chapter', 'topic']
+features = ['question', 'chapter', 'topic', 'difficulty']
 
 
 def clean_data(x):
@@ -29,14 +29,14 @@ def clean_data(x):
             return ''
 
 
-features = ['question', 'chapter', 'topic']
+features = ['question', 'chapter', 'topic', 'difficulty']
 
 for feature in features:
     metadata[feature] = metadata[feature].apply(clean_data)
 
 
 def create_soup(x):
-    return ' ' + x['question'] + ' ' + x['topic'] + ' ' + x['chapter']
+    return ' ' + x['question'] + ' ' + x['topic'] + ' ' + x['chapter'] + ' ' + x['difficulty']
 
 
 metadata['soup'] = metadata.apply(create_soup, axis=1)
@@ -60,3 +60,4 @@ def get_recommendations(questionID, cosine_sim=cosine_sim2):
     sim_scores = sim_scores[1:6]
     question_indices = [i[0] for i in sim_scores]
     return question_indices
+
