@@ -1,30 +1,15 @@
 import pandas as pd
 from sqlalchemy import create_engine
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
-
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import linear_kernel
-#
 db_connection = 'mysql+pymysql://root:@localhost/test'
 
 conn = create_engine(db_connection)
 metadata = pd.read_sql("select * from questions", conn)
 
-# metadata = pd.read_csv('quizes.csv')
-
-# print(metadata.head(2))
-
-# print("new commit")
-
 features = ['question', 'chapter', 'topic']
 
-from ast import literal_eval
-
-# features = ['question', 'chapter', 'topic']
-# for feature in features:
-#     metadata[feature] = metadata[feature].apply(literal_eval)
-
-print(metadata[['question', 'chapter', 'topic']].head(3))
 
 def clean_data(x):
     if isinstance(x, list):
@@ -49,13 +34,11 @@ def create_soup(x):
 
 metadata['soup'] = metadata.apply(create_soup, axis=1)
 
-from sklearn.feature_extraction.text import CountVectorizer
-
 count = CountVectorizer(stop_words='english')
 count_matrix = count.fit_transform(metadata['soup'])
 
 # Compute the Cosine Similarity matrix based on the count_matrix
-from sklearn.metrics.pairwise import cosine_similarity
+
 
 cosine_sim2 = cosine_similarity(count_matrix, count_matrix)
 
@@ -70,16 +53,3 @@ def get_recommendations(questionID, cosine_sim=cosine_sim2):
     sim_scores = sim_scores[1:6]
     question_indices = [i[0] for i in sim_scores]
     return question_indices
-
-
-# def main(idNum):
-#     print(get_recommendations(idNum, cosine_sim2))
-#
-#
-# if __name__ == '__main__':
-#
-#     while(True):
-#         idnumber = int(input("enter question id"))
-#         # print(idnumber)
-#
-#         main(idnumber)
