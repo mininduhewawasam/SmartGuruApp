@@ -3,8 +3,13 @@ from sqlalchemy import create_engine
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-db_connection = 'mysql+pymysql://root:@localhost/smartguru'
-# engine = create_engine("mysql+pymysql://sylvain:passwd@localhost/db?host=localhost?port=3306")me widiyata conncte karana eka karpn
+db_connection = 'mysql+pymysql://u2oI1tyJuT:joBxFoudcl@www.remotemysql.com/u2oI1tyJuT'
+# engine = create_engine("mysql+pymysql://u2oI1tyJuT:joBxFoudcl@www.remotemysql.com/u2oI1tyJuT")me widiyata conncte karana eka karpn
+
+# mySQLconnection = mysql.connector.connect(host='www.remotemysql.com',
+#                                           database='u2oI1tyJuT',
+#                                           user='u2oI1tyJuT',
+#                                           password='joBxFoudcl')
 
 
 conn = create_engine(db_connection)
