@@ -3,7 +3,9 @@ from sqlalchemy import create_engine
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-db_connection = 'mysql+pymysql://root:@localhost/test'
+db_connection = 'mysql+pymysql://root:@localhost/smartguru'
+# engine = create_engine("mysql+pymysql://sylvain:passwd@localhost/db?host=localhost?port=3306")me widiyata conncte karana eka karpn
+
 
 conn = create_engine(db_connection)
 metadata = pd.read_sql("select * from questions", conn)
