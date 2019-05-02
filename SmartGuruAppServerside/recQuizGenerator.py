@@ -24,11 +24,13 @@ def sendQuestions():
         #                                           user='root',
         #                                           password='')
 
-        sql_select_Query = "select QuestionID from sessionsdata where userID=1"
+        sql_select_Query = "SELECT questionID FROM sessionsdata WHERE userID=1 ORDER BY questionID DESC LIMIT 10"
         cursor1 = mySQLconnection.cursor()
         cursor1.execute(sql_select_Query)
         records = cursor1.fetchall()
         # print(records)
+        # print("SELECT questionID FROM sessionsdata WHERE userID=1 ORDER BY questionID DESC LIMIT 2")
+
 
         for row in records:
             sql_select_Query2 = "select * from questions where questionID=" + str(
