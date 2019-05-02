@@ -1,12 +1,19 @@
 from flask import Flask
-from SmartGuruAppServerside import recQuizGenerator
+from SmartGuruApp import generaterandmQuiz
+from SmartGuruApp import sendQuestions
 
 app = Flask(__name__)
 
 
 @app.route('/hello')
 def hello_world():
-    return recQuizGenerator.sendQuestions()
+    return sendQuestions()
+
+
+@app.route('/random')
+def hello_world():
+    return generaterandmQuiz()
+
 
 
 if __name__ == '__main__':
