@@ -1,4 +1,4 @@
-from SmartGuruAppServerside import questionSelector
+from SmartGuruApp import questionSelector
 import json
 
 import mysql.connector
