@@ -31,6 +31,7 @@ def sendQuestions():
         # print(records)
         # print("SELECT questionID FROM sessionsdata WHERE userID=1 ORDER BY questionID DESC LIMIT 2")
 
+
         for row in records:
             sql_select_Query2 = "select * from questions where questionID=" + str(
                 questionSelector.get_recommendations(row[0])[0])+""
