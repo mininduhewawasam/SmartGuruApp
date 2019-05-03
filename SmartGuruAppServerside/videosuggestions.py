@@ -15,7 +15,7 @@ def vediolinks():
         )
 
 
-        sql_select_Query = "SELECT QuestionTopic FROM sessionsdata GROUP BY QuestionTopic HAVING COUNT(sessiondataID) > 4"
+        sql_select_Query = "SELECT QuestionTopic FROM sessionsdata WHERE userID=1 GROUP BY QuestionTopic HAVING COUNT(sessiondataID) > 4"
 
         cursor = mySQLconnection.cursor()
 

@@ -14,7 +14,7 @@ except Error as e:
     print("Error while connecting to MySQL", e)
 
 
-def index():
+def login():
     if request.method == 'POST':
        session.pop('user', None)
 
@@ -32,7 +32,7 @@ def index():
     return render_template('index.html')
 
 
-def protected():
+def redirect():
    if g.user:
      return render_template('protected.html')
 
