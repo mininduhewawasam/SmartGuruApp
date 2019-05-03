@@ -6,6 +6,8 @@ import recQuizGenerator
 import randQuestions
 import addQuestionsToDB
 import viewUsers
+import SessionHandler
+
 
 app = Flask(__name__)
 
@@ -34,7 +36,12 @@ def addQuestions():
 
 @app.route('/users')
 def showUsers():
-    return viewUsers.displayUsers()
+    return viewUsers.displayUsers
+
+@app.route('/login')
+def youtube():
+    return SessionHandler.login()
+
 
 
 if __name__ == '__main__':

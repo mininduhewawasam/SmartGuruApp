@@ -14,7 +14,7 @@ except Error as e:
     print("Error while connecting to MySQL", e)
 
 
-def index():
+def login():
     if request.method == 'POST':
        session.pop('user', None)
 
