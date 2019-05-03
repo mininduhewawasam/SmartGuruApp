@@ -39,9 +39,24 @@ def showUsers():
     return viewUsers.displayUsers
 
 @app.route('/login')
-def youtube():
+def login():
     return SessionHandler.login()
 
+@app.route('/redirect')
+def direct():
+    return SessionHandler.redirect()
+
+@app.route('/request')
+def b_request():
+    return SessionHandler.before_request()
+
+@app.route('/getsession')
+def get_session():
+    return SessionHandler.getsession()
+
+@app.route('/dropsession')
+def drop_session():
+    return SessionHandler.dropsession()
 
 
 if __name__ == '__main__':
