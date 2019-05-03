@@ -1,19 +1,29 @@
 from flask import Flask
-from SmartGuruApp import generaterandmQuiz
-from SmartGuruApp import sendQuestions
+# from SmartGuruAppServerside import generaterandmQuiz
+from SmartGuruAppServerside import recQuizGenerator
+from SmartGuruAppServerside import randQuestions
+from SmartGuruAppServerside import addQuestionsToDB
+from SmartGuruAppServerside import  viewUsers
 
 app = Flask(__name__)
 
 
-@app.route('/hello')
-def hello_world():
-    return sendQuestions()
+@app.route('/recomand')
+def recomendedQuiz():
+    return recQuizGenerator.sendQuestions()
 
 
 @app.route('/random')
-def hello_world():
-    return generaterandmQuiz()
+def randomQuiz():
+    return randQuestions.generaterandmQuiz()
 
+@app.route('/addQS')
+def addQuestions():
+    return addQuestionsToDB.addQuestions()
+
+@app.route('/users')
+def showUsers():
+    return viewUsers.displayUsers()
 
 
 if __name__ == '__main__':
