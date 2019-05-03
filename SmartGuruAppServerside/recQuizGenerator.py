@@ -33,7 +33,7 @@ def sendQuestions():
 
 
         for row in records:
-            sql_select_Query2 = "select * from questions where questionID=" + str(
+            sql_select_Query2 = "select * from user where questionID=" + str(
                 questionSelector.get_recommendations(row[0])[0])+""
             cursor2 = mySQLconnection.cursor()
             cursor2.execute(sql_select_Query2)
