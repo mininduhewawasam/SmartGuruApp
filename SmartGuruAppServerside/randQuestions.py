@@ -22,10 +22,11 @@ def generaterandmQuiz():
         rand_question = random.choice(records)
 
         answerList = rand_question[7].split(',')
-        recQuizList.append({'qs_id': rand_question[0], 'qs_topic': rand_question[9],  'qs_chapter':rand_question[8], 'question': rand_question[1],
+        recQuizList.append({'qs_id': rand_question[0], 'qs_topic': rand_question[13],  'qs_chapter':rand_question[12], 'question': rand_question[1],
                             'options': {'op1': rand_question[2], 'op2': rand_question[3], 'op3': rand_question[4],
-                                        'op4': rand_question[5], 'op5': rand_question[6]}, 'answers': answerList,
+                                        'op4': rand_question[5], 'op5': rand_question[6]}, 'answers': [rand_question[7], rand_question[8], rand_question[9], rand_question[10], rand_question[11],],
                             'difficulty': rand_question[10]})
+
 
         count += 1
 
