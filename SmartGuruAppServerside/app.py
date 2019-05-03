@@ -1,11 +1,11 @@
 from flask import Flask
-# from SmartGuruAppServerside import generaterandmQuiz
-from SmartGuruAppServerside import videosuggestions
-from SmartGuruAppServerside import stacklinkssuggestions
-from SmartGuruAppServerside import recQuizGenerator
-from SmartGuruAppServerside import randQuestions
-from SmartGuruAppServerside import addQuestionsToDB
-from SmartGuruAppServerside import viewUsers
+
+import videosuggestions
+import stacklinkssuggestions
+import recQuizGenerator
+import randQuestions
+import addQuestionsToDB
+import viewUsers
 
 app = Flask(__name__)
 
