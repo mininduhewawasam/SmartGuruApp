@@ -1,4 +1,4 @@
-from SmartGuruAppServerside import questionSelector
+import questionSelector
 import json
 
 import mysql.connector
@@ -28,12 +28,11 @@ def sendQuestions():
         cursor1 = mySQLconnection.cursor()
         cursor1.execute(sql_select_Query)
         records = cursor1.fetchall()
-        # print(records)
         # print("SELECT questionID FROM sessionsdata WHERE userID=1 ORDER BY questionID DESC LIMIT 2")
 
 
         for row in records:
-            sql_select_Query2 = "select * from user where questionID=" + str(
+            sql_select_Query2 = "select * from questions where questionID=" + str(
                 questionSelector.get_recommendations(row[0])[0])+""
             cursor2 = mySQLconnection.cursor()
             cursor2.execute(sql_select_Query2)
@@ -51,6 +50,8 @@ def sendQuestions():
         print("Error while connecting to MySQL", e)
 
     return json.dumps(recQuizList2)
+
+sendQuestions()
 
 
 
