@@ -32,7 +32,7 @@ def login():
     return render_template('index.html')
 
 
-def protected():
+def redirect():
    if g.user:
      return render_template('protected.html')
 
