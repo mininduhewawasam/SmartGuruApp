@@ -3,12 +3,12 @@ from flask import Flask
 from SmartGuruAppServerside import recQuizGenerator
 from SmartGuruAppServerside import randQuestions
 from SmartGuruAppServerside import addQuestionsToDB
-from SmartGuruAppServerside import  viewUsers
+from SmartGuruAppServerside import viewUsers
 
 app = Flask(__name__)
 
 
-@app.route('/recomand')
+@app.route('/.')
 def recomendedQuiz():
     return recQuizGenerator.sendQuestions()
 
