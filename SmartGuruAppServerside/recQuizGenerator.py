@@ -45,7 +45,7 @@ def sendQuestions():
             # print(row2[0][0])
             answerList = row2[0][7].split(',')
 
-            recQuizList2.append({'qs_id': row2[0][0], 'qs_topic': row2[0][9], 'question': row2[0][1], 'options': {'op1': row2[0][2], 'op2': row2[0][3], 'op3': row2[0][4], 'op4': row2[0][5], 'op5': row2[0][6]}, 'answers': answerList,   'difficulty': row2[0][10]})
+            recQuizList2.append({'qs_id': row2[0][0], 'qs_topic': row2[0][9], 'qs_chapter':row2[0][8], 'question': row2[0][1], 'options': {'op1': row2[0][2], 'op2': row2[0][3], 'op3': row2[0][4], 'op4': row2[0][5], 'op5': row2[0][6]}, 'answers': answerList,   'difficulty': row2[0][10]})
 
     except Error as e:
         print("Error while connecting to MySQL", e)
