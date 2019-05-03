@@ -14,15 +14,15 @@ def sendQuestions():
     recQuizList.clear()
     try:
 
-        mySQLconnection = mysql.connector.connect(host='www.remotemysql.com',
-                                                  database='u2oI1tyJuT',
-                                                  user='u2oI1tyJuT',
-                                                  password='joBxFoudcl')
+        # mySQLconnection = mysql.connector.connect(host='www.remotemysql.com',
+        #                                           database='u2oI1tyJuT',
+        #                                           user='u2oI1tyJuT',
+        #                                           password='joBxFoudcl')
 
-        # mySQLconnection = mysql.connector.connect(host='Localhost',
-        #                                           database='smartgurunew',
-        #                                           user='root',
-        #                                           password='')
+        mySQLconnection = mysql.connector.connect(host='Localhost',
+                                                  database='smartgurunew',
+                                                  user='root',
+                                                  password='')
 
         sql_select_Query = "SELECT questionID FROM sessionsdata WHERE userID=1 ORDER BY questionID DESC LIMIT 10"
         cursor1 = mySQLconnection.cursor()
@@ -42,9 +42,9 @@ def sendQuestions():
 
         for row2 in recQuizList:
             # print(row2[0][0])
-            answerList = row2[0][7].split(',')
 
-            recQuizList2.append({'qs_id': row2[0][0], 'qs_topic': row2[0][9], 'qs_chapter':row2[0][8], 'question': row2[0][1], 'options': {'op1': row2[0][2], 'op2': row2[0][3], 'op3': row2[0][4], 'op4': row2[0][5], 'op5': row2[0][6]}, 'answers': answerList,   'difficulty': row2[0][10]})
+
+            recQuizList2.append({'qs_id': row2[0][0], 'qs_topic': row2[0][13], 'qs_chapter':row2[0][12], 'question': row2[0][1], 'options': {'op1': row2[0][2], 'op2': row2[0][3], 'op3': row2[0][4], 'op4': row2[0][5], 'op5': row2[0][6]}, 'answers': [row2[0][7], row2[0][8], row2[0][9], row2[0][10], row2[0][11], ],   'difficulty': row2[0][14]})
 
     except Error as e:
         print("Error while connecting to MySQL", e)
