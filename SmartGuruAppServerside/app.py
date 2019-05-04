@@ -36,7 +36,7 @@ def addQuestions():
 
 @app.route('/users')
 def showUsers():
-    return viewUsers.displayUsers
+    return viewUsers.displayUsers()
 
 @app.route('/login')
 def login():
