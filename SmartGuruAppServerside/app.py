@@ -21,7 +21,7 @@ def youtube():
 def stackoverflow():
     return stacklinkssuggestions.stacklinks()
 
-@app.route('/leaderboardlist', methods=['GET'])
+@app.route('/leaderboardlist')
 def leaderboardmarks():
   return leaderboard.sortedmarks()
 
