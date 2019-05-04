@@ -40,6 +40,11 @@ def generaterandmQuiz():
 
         for rand_question in questions:
 
+            answerList = []
+            for i in range(7, 11):
+                if rand_question[i] != "":
+                    answerList.append(rand_question[i])
+
             answerList = rand_question[7].split(',')
             questionList.append(
                 {'qs_id': rand_question[0], 'qs_topic': rand_question[9], 'qs_chapter': rand_question[8],
