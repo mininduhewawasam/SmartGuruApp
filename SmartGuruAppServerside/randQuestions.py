@@ -23,6 +23,7 @@ def generaterandmQuiz():
 
     for topic in topics:
         topicList.append(topic[0])
+        
 
     random_topics = []
 
@@ -57,7 +58,7 @@ def generaterandmQuiz():
     if len(questionList) > 10:
         for i in random.sample(range(len(questionList)), 10):
             finalQuiz.append(questionList[i])
-            
+
 
     return json.dumps(finalQuiz)
 
