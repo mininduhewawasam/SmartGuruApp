@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify, request
 
 import videosuggestions
 import stacklinkssuggestions
@@ -8,6 +8,9 @@ import addQuestionsToDB
 import viewUsers
 import SessionHandler
 import RegisterUsers
+import analyze_performance as analyzer
+import quiz_result_handler as quiz_handler
+import lesson_quiz_generator
 
 
 app = Flask(__name__)
@@ -25,6 +28,16 @@ def stackoverflow():
 @app.route('/recomand')
 def recomendedQuiz():
     return recQuizGenerator.sendQuestions()
+
+
+@app.route('/lessons/<string:level>/<string:lesson>')
+def get_questions(lesson, level):
+    return lesson_quiz_generator.get_questions(lesson, level)
+
+
+@app.route('/performance/<int:user_id>', methods=['GET'])
+def get_performance(user_id):
+    return analyzer.calculate_performance(user_id)
 
 
 @app.route('/random')
@@ -62,6 +75,14 @@ def drop_session():
 @app.route('/register')
 def register():
     return RegisterUsers.signUp()
+
+@app.route('/mixedquiz', methods=['POST'])
+def get_random_quiz():
+    data = request.data
+    quiz_handler.update_quiz_results(data)
+    return jsonify({
+        'status': 'ok'
+    })
 
 
 if __name__ == '__main__':
