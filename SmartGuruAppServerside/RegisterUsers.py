@@ -1,11 +1,11 @@
-from flask import Flask,request,session,render_template,g
+from flask import Flask, request, session, render_template, g, app
 import os
 import mysql.connector
 from mysql.connector import Error
 from pandas._libs import json
 from werkzeug.security import generate_password_hash
 
-app = Flask(__name__)
+
 
 try:
     mySQLconnection = mysql.connector.connect(host='www.remotemysql.com',
@@ -18,7 +18,7 @@ except Error as e:
     print("Error while connecting to MySQL", e)
 
 
-@app.route('/')
+
 def showSignUp():
    return render_template('signup.html')
 
@@ -26,19 +26,19 @@ def showSignUp():
 @app.route('/signUp', methods=['POST', 'GET'])
 def signUp():
     try:
-        _name = request.form['inputName']
+        _username = request.form['inputName']
         _email = request.form['inputEmail']
         _password = request.form['inputPassword']
 
         # validate the received values
-        if _name and _email and _password:
+        if _username and _email and _password:
 
             # All Good, let's call MySQL
 
             conn = mysql.connect()
             cursor = conn.cursor()
             _hashed_password = generate_password_hash(_password)
-            cursor.callproc('sp_createUser', (_name, _email, _hashed_password))
+            cursor.callproc('sp_createUser', (_username, _email, _hashed_password))
             data = cursor.fetchall()
 
             if len(data) is 0:
@@ -56,5 +56,3 @@ def signUp():
         conn.close()
 
 
-if __name__ == '__main__':
-    app.run()
