@@ -77,7 +77,7 @@ def register():
     return RegisterUsers.signUp()
 
 @app.route('/mixedquiz', methods=['POST'])
-def get_random_quiz():
+def update_quiz_results():
     data = request.data
     quiz_handler.update_quiz_results(data)
     return jsonify({
