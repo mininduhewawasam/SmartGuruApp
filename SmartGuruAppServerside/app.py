@@ -2,7 +2,6 @@ from flask import Flask
 
 import videosuggestions
 import stacklinkssuggestions
-import leaderboard
 import recQuizGenerator
 import randQuestions
 import addQuestionsToDB
@@ -20,10 +19,6 @@ def youtube():
 @app.route('/stackoverflowlinks')
 def stackoverflow():
     return stacklinkssuggestions.stacklinks()
-
-@app.route('/leaderboardlist')
-def leaderboardmarks():
-  return leaderboard.sortedmarks()
 
 
 @app.route('/recomand')
