@@ -1,33 +1,59 @@
 import json
 import random
 import mysql.connector
-recQuizList=[]
+
 
 def generaterandmQuiz():
-    recQuizList.clear()
 
+    topicList = []
+    questionList = []
+    finalQuiz = []
 
     mySQLconnection = mysql.connector.connect(host='www.remotemysql.com',
                                               database='u2oI1tyJuT',
                                               user='u2oI1tyJuT',
                                               password='joBxFoudcl')
 
-    sql_select_Query = "select * from questions"
+    select_topics_query = "select topic from questions group by topic"
     cursor1 = mySQLconnection.cursor()
-    cursor1.execute(sql_select_Query)
-    records = cursor1.fetchall()
+    cursor1.execute(select_topics_query)
+    topics = cursor1.fetchall()
 
-    count = 1
-    while count <= 10:
-        rand_question = random.choice(records)
+    for topic in topics:
+        topicList.append(topic[0])
 
-        answerList = rand_question[7].split(',')
-        recQuizList.append({'qs_id': rand_question[0], 'qs_topic': rand_question[13],  'qs_chapter':rand_question[12], 'question': rand_question[1],
-                            'options': {'op1': rand_question[2], 'op2': rand_question[3], 'op3': rand_question[4],
-                                        'op4': rand_question[5], 'op5': rand_question[6]}, 'answers': [rand_question[7], rand_question[8], rand_question[9], rand_question[10], rand_question[11],],
-                            'difficulty': rand_question[10]})
+    random_topics = []
+
+    for i in random.sample(range(len(topicList)), 3):
+        random_topics.append(topicList[i])
+
+    print("------------------------------------")
+    print("random_topics")
+    print(random_topics)
+    print("------------------------------------")
+
+    for i in range(len(random_topics)):
+        select_questions_query = "select * from questions where topic='" + random_topics[i] + "'"
+        cursor2 = mySQLconnection.cursor()
+        cursor2.execute(select_questions_query)
+        questions = cursor2.fetchall()
+
+        for rand_question in questions:
+
+            answerList = rand_question[7].split(',')
+            questionList.append(
+                {'qs_id': rand_question[0], 'qs_topic': rand_question[9], 'qs_chapter': rand_question[8],
+                 'question': rand_question[1],
+                 'options': {'op1': rand_question[2], 'op2': rand_question[3], 'op3': rand_question[4],
+                             'op4': rand_question[5], 'op5': rand_question[6]}, 'answers': answerList,
+                 'difficulty': rand_question[10]})
+
+    if len(questionList) > 10:
+        for i in random.sample(range(len(questionList)), 10):
+            finalQuiz.append(questionList[i])
+
+    return json.dumps(finalQuiz)
 
 
-        count += 1
-
-    return json.dumps(recQuizList)
+if __name__ == "__main__":
+    generaterandmQuiz()
