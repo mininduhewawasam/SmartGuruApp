@@ -7,6 +7,7 @@ import randQuestions
 import addQuestionsToDB
 import viewUsers
 import SessionHandler
+import RegisterUsers
 
 
 app = Flask(__name__)
@@ -57,6 +58,10 @@ def get_session():
 @app.route('/dropsession')
 def drop_session():
     return SessionHandler.dropsession()
+
+@app.route('/register')
+def register():
+    return RegisterUsers.signUp()
 
 
 if __name__ == '__main__':
