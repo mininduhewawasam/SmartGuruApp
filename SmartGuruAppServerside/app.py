@@ -11,6 +11,7 @@ import RegisterUsers
 import analyze_performance as analyzer
 import quiz_result_handler as quiz_handler
 import lesson_quiz_generator
+import leaderboard
 
 
 app = Flask(__name__)
@@ -24,6 +25,9 @@ def youtube():
 def stackoverflow():
     return stacklinkssuggestions.stacklinks()
 
+@app.route('/leaderboardlist')
+def leaderboardmarks():
+  return leaderboard.sortedmarks()
 
 @app.route('/recomand')
 def recomendedQuiz():
