@@ -30,7 +30,7 @@ def displayUsers():
             print("usertype = ", row[4], "\n")
 
             userList.append({'Id': row[0], 'Name': row[1], 'Email': row[2],
-                                'Password': row[3], 'User Type':row[4]})
+                                'Password': row[3], 'UserType':row[4]})
         cursor.close()
 
     except Error as e:

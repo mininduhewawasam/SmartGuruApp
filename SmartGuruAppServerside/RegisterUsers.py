@@ -23,7 +23,7 @@ def showSignUp():
    return render_template('signup.html')
 
 
-@app.route('/signUp', methods=['POST', 'GET'])
+#@app.route('/signUp', methods=['POST', 'GET'])
 def signUp():
     try:
         _username = request.form['inputName']

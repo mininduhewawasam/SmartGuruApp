@@ -83,6 +83,10 @@ def drop_session():
 def register():
     return RegisterUsers.signUp()
 
+@app.route('/signUp', methods=['POST', 'GET'])
+def signUp():
+    return RegisterUsers.signUp
+
 @app.route('/edit', methods=['GET', 'POST'])
 def edit_profile():
     if request.method == "GET":
