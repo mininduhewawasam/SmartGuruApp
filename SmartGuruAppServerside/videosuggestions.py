@@ -43,7 +43,7 @@ def vediolinks():
 
             for video in videos:
                 try:
-                    comments = a.get_comments(video)
+                    comments = a.get_comments(video) #get the comments
                 except HttpError:
                     print("Error")
 
