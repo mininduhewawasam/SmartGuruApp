@@ -16,6 +16,7 @@ import edit_profile as profile
 import json
 
 
+
 app = Flask(__name__)
 
 @app.route('/youtubelinks')
@@ -48,7 +49,7 @@ def get_performance(user_id):
 
 @app.route('/random')
 def randomQuiz():
-    return randQuestions.generaterandmQuiz()
+    return randQuestions.returnRandomQuiz()
 
 @app.route('/addQS')
 def addQuestions():
