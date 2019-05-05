@@ -16,7 +16,7 @@ def vediolinks():
 
 
         sql_select_Query = "SELECT QuestionTopic FROM sessionsdata WHERE userID=1 GROUP BY QuestionTopic HAVING COUNT(sessiondataID) > 4"
-
+         #get the most duplicate topic that users give the wrong answers from the database
         cursor = mySQLconnection.cursor()
 
         cursor.execute(sql_select_Query,)
@@ -37,6 +37,7 @@ def vediolinks():
 
 
             videos = a.search_by_keyword("Java-" + word)
+            #search the topic name and get the 10 youtube vedios related to topic
 
             comments = []
 
@@ -61,16 +62,16 @@ def vediolinks():
 
                 with open("demofile.txt", "w", encoding='utf-8') as document:
                     document.write(comm)
-
+                #write the in the txt file and read them back
                 with open("demofile.txt", "r", encoding='utf-8') as f:
                     for line in f.read().split('\n'):
                         analysis = SentimentIntensityAnalyzer()
-
+                        #get the compound value of each comments using vader sentiment analysis
                         score = analysis.polarity_scores(line)
                         total = total + score['compound']
 
 
-                if (length > 0):
+                if (length > 0):  #if the vedio has comments this will excicute
                     avg = total / length
 
                 print("compound sum of all comments: ")
@@ -78,9 +79,9 @@ def vediolinks():
                 print("average: ")
                 print(avg)
 
-                if avg >= 0.30:
+                if avg >= 0.30:   #if the avarage of all compounds is greater than 0.30 this will excicute
 
-                    if length >= 30:
+                    if length >= 30:   #check whethe the vedio has minimumly 30 comments
 
                         print("its a good vedio")
                         videolink = 'https://www.youtube.com/watch?v=' + video
@@ -88,7 +89,7 @@ def vediolinks():
 
 
 
-                        list.append(videolink)
+                        list.append(videolink)   #insert suggested links to the list
                         print(list)
 
 
@@ -109,5 +110,5 @@ def vediolinks():
 
 
         video.append(list )
-        obj = json.dumps(list)
+        obj = json.dumps(list)  #convert to the json object
         return obj
