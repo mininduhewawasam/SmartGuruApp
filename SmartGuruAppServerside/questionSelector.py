@@ -3,26 +3,19 @@ from sqlalchemy import create_engine
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-db_connection = 'mysql+pymysql://u2oI1tyJuT:joBxFoudcl@www.remotemysql.com/u2oI1tyJuT'
-# engine = create_engine("mysql+pymysql://u2oI1tyJuT:joBxFoudcl@www.remotemysql.com/u2oI1tyJuT")me widiyata conncte karana eka karpn
+#/class of recquizGenerator is used to pick similar quiestions for recomanded questions
 
-# mySQLconnection = mysql.connector.connect(host='www.remotemysql.com',
-#                                           database='u2oI1tyJuT',
-#                                           user='u2oI1tyJuT',
-#                                           password='joBxFoudcl')
+db_connection = 'mysql+pymysql://u2oI1tyJuT:joBxFoudcl@www.remotemysql.com/u2oI1tyJuT'
 
 
 conn = create_engine(db_connection)
-metadata = pd.read_sql("select * from questions", conn)
-
-features = ['question', 'chapter', 'topic', 'difficulty']
+QuestionMetadata = pd.read_sql("select * from questions", conn)
 
 
-def clean_data(x):
+def clean_epmty_data(x):
     if isinstance(x, list):
         return [str.lower(i.replace(" ", "")) for i in x]
     else:
-        #Check if director exists. If not, return empty string
         if isinstance(x, str):
             return str.lower(x.replace(" ", ""))
         else:
@@ -32,28 +25,29 @@ def clean_data(x):
 features = ['question', 'chapter', 'topic', 'difficulty']
 
 for feature in features:
-    metadata[feature] = metadata[feature].apply(clean_data)
+    QuestionMetadata[feature] = QuestionMetadata[feature].apply(clean_epmty_data)
 
 
-def create_soup(x):
+def createSoupOfQuestions(x):
     return ' ' + x['question'] + ' ' + x['topic'] + ' ' + x['chapter'] + ' ' + x['difficulty']
 
 
-metadata['soup'] = metadata.apply(create_soup, axis=1)
+QuestionMetadata['soup'] = QuestionMetadata.apply(createSoupOfQuestions, axis=1)
 
 count = CountVectorizer(stop_words='english')
-count_matrix = count.fit_transform(metadata['soup'])
+
+count_matrix = count.fit_transform(QuestionMetadata['soup'])
 
 # Compute the Cosine Similarity matrix based on the count_matrix
 
 
-cosine_sim2 = cosine_similarity(count_matrix, count_matrix)
+cosine_similarty = cosine_similarity(count_matrix, count_matrix)
 
-metadata = metadata.reset_index()
+metadata = QuestionMetadata.reset_index()
 indices = pd.Series(metadata.index, index=metadata['question'])
 
 
-def get_recommendations(questionID, cosine_sim=cosine_sim2):
+def get_recommendations(questionID, cosine_sim=cosine_similarty):
     idx = indices[questionID]
     sim_scores = list(enumerate(cosine_sim[idx]))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
