@@ -28,7 +28,7 @@ def sortedmarks():
 
         id = userid[0]
 
-        sql2 = "SELECT * FROM users where userID= ('%s')" % (id)
+        sql2 = "SELECT * FROM users where userID= ('%s')" % (id)   #get the user names
         mycursor.execute(sql2)
         myres = mycursor.fetchall()
         print(myres)
@@ -37,10 +37,9 @@ def sortedmarks():
             unames = name[1]
             print(unames)
 
-        #
-        #     usenamelist.append(unames)
 
-        sql1 = "SELECT * FROM sessionsdetails where userID= ('%s')" % (id)
+
+        sql1 = "SELECT * FROM sessionsdetails where userID= ('%s')" % (id)   #get scores according to specific users
         mycursor.execute(sql1)
         myresult1 = mycursor.fetchall()
 
@@ -63,9 +62,11 @@ def sortedmarks():
         listing.append(details)
         usermarkslist.append(maximum)
     print(usermarkslist)
-    print(listing)
+    print(listing)    #get the highest score of each users with thir names and store it in the list
 
 
+
+    #using heapq library get the score best to worst
     heap = []
     for x in listing:
         calculation_result = x
