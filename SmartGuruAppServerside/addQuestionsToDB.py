@@ -11,7 +11,7 @@ def addQuestions():
                                               user='u2oI1tyJuT',
                                               password='joBxFoudcl')
 
-    sql_select_Query = "INSERT INTO `questions` (`questionID`, `question`, `a1`, `a2`, `a3`, `a4`, `a5`, `correctanswer`, `chapter`, `topic`, `difficulty`) VALUES ('', '', '', '', '', '', '', '', '', '', '')"
+    sql_select_Query = "INSERT INTO questions (`questionID`, `question`, `a1`, `a2`, `a3`, `a4`, `a5`, `correctanswer`, `chapter`, `topic`, `difficulty`) VALUES ('', '', '', '', '', '', '', '', '', '', '')"
     cursor1 = mySQLconnection.cursor()
     cursor1.execute(sql_select_Query)
     records = cursor1.fetchall()
