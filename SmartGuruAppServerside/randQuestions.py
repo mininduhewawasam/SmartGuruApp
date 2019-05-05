@@ -66,5 +66,5 @@ def returnRandomQuiz():
         questions = generaterandmQuiz()
 
     return json.dumps(questions)
-generaterandmQuiz()
+
 
