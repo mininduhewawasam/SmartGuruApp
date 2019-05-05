@@ -19,7 +19,7 @@ def sortedmarks():
     nrecords = mycursor.fetchall()
 
     usermarkslist = []
-    # usenamelist = []
+
     listing = []
 
     for userid in nrecords:
