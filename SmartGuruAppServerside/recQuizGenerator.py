@@ -1,13 +1,12 @@
 import questionSelector
 import json
-
 import mysql.connector
 from mysql.connector import Error
 
 recQuizList = []
 recQuizList2 = []
-
 sentjson = json
+
 
 
 def sendQuestions():
@@ -25,7 +24,7 @@ def sendQuestions():
         #                                           user='root',
         #                                           password='')
 
-        sql_select_Query = "SELECT questionID FROM sessionsdata WHERE userID=1 ORDER BY questionID DESC LIMIT 10"
+        sql_select_Query = "SELECT questionID FROM sessionsdata WHERE userID=1 ORDER BY sessionDataID  DESC LIMIT 10"
         cursor1 = mySQLconnection.cursor()
         cursor1.execute(sql_select_Query)
         records = cursor1.fetchall()
