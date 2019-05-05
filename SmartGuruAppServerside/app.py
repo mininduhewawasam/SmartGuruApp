@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, session
 
 import videosuggestions
 import stacklinkssuggestions
@@ -12,6 +12,9 @@ import analyze_performance as analyzer
 import quiz_result_handler as quiz_handler
 import lesson_quiz_generator
 import leaderboard
+import edit_profile as profile
+import json
+
 
 
 app = Flask(__name__)
@@ -46,7 +49,7 @@ def get_performance(user_id):
 
 @app.route('/random')
 def randomQuiz():
-    return randQuestions.generaterandmQuiz()
+    return randQuestions.returnRandomQuiz()
 
 @app.route('/addQS')
 def addQuestions():
@@ -79,6 +82,14 @@ def drop_session():
 @app.route('/register')
 def register():
     return RegisterUsers.signUp()
+
+@app.route('/edit', methods=['GET', 'POST'])
+def edit_profile():
+    if request.method == "GET":
+        return profile.get_user_details(session['user'])
+    if request.method == "POST":
+        data = request.data
+        return profile.update_user_details(session['user'], data)
 
 @app.route('/mixedquiz', methods=['POST'])
 def update_quiz_results():

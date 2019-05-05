@@ -28,7 +28,7 @@ def generaterandmQuiz():
         random_topics.append(topicList[i])
 
     print("------------------------------------")
-    print("random_topics")
+    print("Random topics")
     print(random_topics)
     print("------------------------------------")
 
@@ -41,24 +41,30 @@ def generaterandmQuiz():
         for rand_question in questions:
 
             answerList = []
-            for i in range(7, 11):
+            for i in range(7, 12):
                 if rand_question[i] != "":
                     answerList.append(rand_question[i])
 
-            answerList = rand_question[7].split(',')
             questionList.append(
-                {'qs_id': rand_question[0], 'qs_topic': rand_question[9], 'qs_chapter': rand_question[8],
+                {'qs_id': rand_question[0], 'qs_topic': rand_question[13], 'qs_chapter': rand_question[12],
                  'question': rand_question[1],
                  'options': {'op1': rand_question[2], 'op2': rand_question[3], 'op3': rand_question[4],
                              'op4': rand_question[5], 'op5': rand_question[6]}, 'answers': answerList,
-                 'difficulty': rand_question[10]})
+                 'difficulty': rand_question[14]})
+
 
     if len(questionList) > 10:
         for i in random.sample(range(len(questionList)), 10):
             finalQuiz.append(questionList[i])
 
-    return json.dumps(finalQuiz)
+    return finalQuiz
 
 
-if __name__ == "__main__":
-    generaterandmQuiz()
+def returnRandomQuiz():
+    questions = generaterandmQuiz()
+    while len(questions) < 10:
+        questions = generaterandmQuiz()
+
+    return json.dumps(questions)
+
+
