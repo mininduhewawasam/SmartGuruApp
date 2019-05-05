@@ -25,8 +25,8 @@ def stacklinks():
         )
 
 
-    sql_select_Query = """SELECT QuestionTopic FROM sessionsdata GROUP BY QuestionTopic HAVING COUNT(QuestionID) > 5"""
-
+    sql_select_Query = """SELECT QuestionTopic FROM sessionsdata WHERE userID=1 GROUP BY QuestionTopic HAVING COUNT(QuestionID) > 5"""
+    # get the most duplicate topic that users give the wrong answers from the database
     cursor = mySQLconnection.cursor()
 
     cursor.execute(sql_select_Query,)
@@ -41,7 +41,7 @@ def stacklinks():
         print(row[0])
         results = google_search(
             'java '+row[0]+':en.stackoverflow.com', my_api_key, my_cse_id, num=10)
-
+             #search result using by google api
 
         for result in results:
             pprint.pprint(result)
@@ -50,16 +50,17 @@ def stacklinks():
             json_list = json.loads(result_json)
     for item in json_list:
         if item['displayLink'] == 'stackoverflow.com':
+            #if the link is stack overflow link the this will be excicute
             print(item['link'])
 
             stacklinks = (item['link'])
-
+            #append links to the list
             stacklist.append(stacklinks)
             print(stacklist)
 
     video = []
 
     video.append(stacklist)
-    stackobj = json.dumps(stacklist)
+    stackobj = json.dumps(stacklist) #convert in to json object
     return stackobj
 
