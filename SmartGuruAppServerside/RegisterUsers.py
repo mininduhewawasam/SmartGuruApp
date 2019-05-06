@@ -1,58 +1,37 @@
-from flask import Flask, request, session, render_template, g, app
-import os
+from flask import session
 import mysql.connector
-from mysql.connector import Error
-from pandas._libs import json
-from werkzeug.security import generate_password_hash
+import json
 
 
+def register_user(data):
 
-try:
     mySQLconnection = mysql.connector.connect(host='www.remotemysql.com',
                                               database='u2oI1tyJuT',
                                               user='u2oI1tyJuT',
-                                             password='joBxFoudcl')
+                                              password='joBxFoudcl')
+
+    user_details = json.loads(data)
+
+    username = user_details.get("username")
+    email = user_details.get("email")
+    password = user_details.get("password")
+    user_type = user_details.get("userType")
+
+    sql_select_Query = "SELECT * FROM users WHERE userName='" + username + "' or userEmail='"+email+"'"
+    cursor1 = mySQLconnection.cursor()
+    cursor1.execute(sql_select_Query)
+    records = cursor1.fetchall()
 
 
-except Error as e:
-    print("Error while connecting to MySQL", e)
+    if len(records) == 0:
+        sql_query = 'INSERT INTO users (userName, userEmail, password, userType) VALUES (%s, %s, %s, %s)'
+        cursor = mySQLconnection.cursor()
+        val = (username, email, password, user_type)
+        cursor.execute(sql_query, val)
+        mySQLconnection.commit()
 
+        session['user'] = username
 
-
-def showSignUp():
-   return render_template('signup.html')
-
-
-#@app.route('/signUp', methods=['POST', 'GET'])
-def signUp():
-    try:
-        _username = request.form['inputName']
-        _email = request.form['inputEmail']
-        _password = request.form['inputPassword']
-
-        # validate the received values
-        if _username and _email and _password:
-
-            # All Good, let's call MySQL
-
-            conn = mysql.connect()
-            cursor = conn.cursor()
-            _hashed_password = generate_password_hash(_password)
-            cursor.callproc('sp_createUser', (_username, _email, _hashed_password))
-            data = cursor.fetchall()
-
-            if len(data) is 0:
-                conn.commit()
-                return json.dumps({'message': 'User created successfully !'})
-            else:
-                return json.dumps({'error': str(data[0])})
-        else:
-            return json.dumps({'html': '<span>Enter the required fields</span>'})
-
-    except Exception as e:
-        return json.dumps({'error': str(e)})
-    finally:
-        cursor.close()
-        conn.close()
-
-
+        return json.dumps({"status": "Successfully Registered"})
+    else:
+        return json.dumps({"status": "User Already Exist"})
