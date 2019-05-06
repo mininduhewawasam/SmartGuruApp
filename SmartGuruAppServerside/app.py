@@ -59,12 +59,23 @@ def addQuestions():
 def showUsers():
     return viewUsers.displayUsers()
 
-@app.route('/login',methods=['GET'])
-def login(data):
-    return login.user_login(data)
 
-@app.route('/register',methods=['POST', 'GET'])
-def register(data):
+@app.route('/login',methods=['POST'])
+def login():
+    data = request.data
+
+    response_json = login.user_login(data)
+    response = json.loads(response_json)
+    if response.get("status") == "Access Allowed":
+        session['user'] = json.loads(data).get("username")
+        print(json.loads(data).get("username"))
+        print(session['user'])
+    return response_json
+
+
+@app.route('/register',methods=['POST'])
+def user_register():
+    data = request.data
     return register.register_user(data)
 
 @app.route('/edit', methods=['GET', 'POST'])
