@@ -6,8 +6,8 @@ import recQuizGenerator
 import randQuestions
 import addQuestionsToDB
 import viewUsers
-import SessionHandler
-import RegisterUsers
+import SessionHandler as login
+import RegisterUsers as register
 import analyze_performance as analyzer
 import quiz_result_handler as quiz_handler
 import lesson_quiz_generator
@@ -59,33 +59,13 @@ def addQuestions():
 def showUsers():
     return viewUsers.displayUsers()
 
-@app.route('/login')
-def login():
-    return SessionHandler.login()
+@app.route('/login',methods=['GET'])
+def login(data):
+    return login.user_login(data)
 
-@app.route('/redirect')
-def direct():
-    return SessionHandler.redirect()
-
-@app.route('/request')
-def b_request():
-    return SessionHandler.before_request()
-
-@app.route('/getsession')
-def get_session():
-    return SessionHandler.getsession()
-
-@app.route('/dropsession')
-def drop_session():
-    return SessionHandler.dropsession()
-
-@app.route('/register')
-def register():
-    return RegisterUsers.signUp()
-
-@app.route('/signUp', methods=['POST', 'GET'])
-def signUp():
-    return RegisterUsers.signUp
+@app.route('/register',methods=['POST', 'GET'])
+def register(data):
+    return register.register_user(data)
 
 @app.route('/edit', methods=['GET', 'POST'])
 def edit_profile():
