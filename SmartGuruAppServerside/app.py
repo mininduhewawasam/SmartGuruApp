@@ -86,6 +86,16 @@ def edit_profile():
         data = request.data
         return profile.update_user_details(session['user'], data)
 
+
+@app.route('/quiz', methods=['POST'])
+def get_wrong_answers():
+    data = request.data
+    analyzer.add_wrong_questions(data)
+    return jsonify({
+        'status': 'ok'
+    })
+
+
 @app.route('/mixedquiz', methods=['POST'])
 def update_quiz_results():
     data = request.data
