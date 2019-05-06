@@ -1,3 +1,5 @@
+import os
+from flask import session, Flask
 import mysql.connector
 import json
 
@@ -31,3 +33,7 @@ def update_user_details(username, data):
     val = (response.get("username"), response.get("email"), response.get("password"), username)
     cursor.execute(sql, val)
     SQLconnection.commit()
+
+
+if __name__ == '__main__':
+    get_user_details("saneth98")
