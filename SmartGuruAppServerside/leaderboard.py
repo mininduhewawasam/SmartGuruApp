@@ -56,8 +56,8 @@ def sortedmarks():
         num = userlocallist
         print('Maximum number of user id is:', max(num))
         maximum = max(num)
-        print(unames, maximum)
-        details = (unames, maximum)
+        print(maximum, unames)
+        details = (maximum, unames)
 
         listing.append(details)
         usermarkslist.append(maximum)
