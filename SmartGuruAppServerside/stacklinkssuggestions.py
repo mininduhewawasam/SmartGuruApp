@@ -25,7 +25,7 @@ def stacklinks():
         )
 
 
-    sql_select_Query = """SELECT QuestionTopic FROM sessionsdata WHERE userID=1 GROUP BY QuestionTopic HAVING COUNT(QuestionID) > 5"""
+    sql_select_Query = """SELECT QuestionTopic FROM (SELECT * FROM sessionsdata WHERE userID=1 ORDER BY sessiondataID DESC LIMIT 20) as sessionsdata GROUP BY QuestionTopic HAVING COUNT(sessiondataID) > 3"""
     # get the most duplicate topic that users give the wrong answers from the database
     cursor = mySQLconnection.cursor()
 
