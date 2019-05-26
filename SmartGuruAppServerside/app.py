@@ -13,28 +13,29 @@ import quiz_result_handler as quiz_handler
 import lesson_quiz_generator
 import leaderboard
 import edit_profile as profile
-import json
-
 
 
 app = Flask(__name__)
 
-@app.route('/youtubelinks')
-def youtube():
-    return videosuggestions.vediolinks()
+
+@app.route('/youtubelinks/<string:user_id>')
+def youtube(user_id):
+    return videosuggestions.vediolinks(user_id)
 
 
-@app.route('/stackoverflowlinks')
-def stackoverflow():
-    return stacklinkssuggestions.stacklinks()
+@app.route('/stackoverflowlinks/<string:user_id>')
+def stackoverflow(user_id):
+    return stacklinkssuggestions.stacklinks(user_id)
+
 
 @app.route('/leaderboardlist')
 def leaderboardmarks():
-  return leaderboard.sortedmarks()
+    return leaderboard.sortedmarks()
 
-@app.route('/recomand')
-def recomendedQuiz():
-    return recQuizGenerator.sendQuestions()
+
+@app.route('/recomand/<string:user_id>')
+def recomendedQuiz(user_id):
+    return recQuizGenerator.sendQuestions(user_id)
 
 
 @app.route('/lessons/<string:level>/<string:lesson>')
@@ -60,31 +61,24 @@ def showUsers():
     return viewUsers.displayUsers()
 
 
-@app.route('/login',methods=['POST'])
+@app.route('/login', methods=['POST'])
 def login():
     data = request.data
-
-    response_json = login.user_login(data)
-    response = json.loads(response_json)
-    if response.get("status") == "Access Allowed":
-        session['user'] = json.loads(data).get("username")
-        print(json.loads(data).get("username"))
-        print(session['user'])
-    return response_json
+    return login.user_login(data)
 
 
-@app.route('/register',methods=['POST'])
+@app.route('/register', methods=['POST'])
 def user_register():
     data = request.data
     return register.register_user(data)
 
-@app.route('/edit', methods=['GET', 'POST'])
-def edit_profile():
+@app.route('/edit/<string:user_id>', methods=['GET', 'POST'])
+def edit_profile(user_id):
     if request.method == "GET":
-        return profile.get_user_details(session['user'])
+        return profile.get_user_details(user_id)
     if request.method == "POST":
         data = request.data
-        return profile.update_user_details(session['user'], data)
+        return profile.update_user_details(user_id, data)
 
 
 @app.route('/quiz', methods=['POST'])
