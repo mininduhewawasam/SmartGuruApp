@@ -99,7 +99,7 @@ def calculate_performance(user_id):
 
     try:
 
-        a = "SELECT * FROM sessionsdetails WHERE userID='" + str(user_id) + "'"
+        a = "SELECT * FROM sessionsdetails WHERE userID='" + user_id + "'"
         sql_query = a
         cursor = sql_connection.cursor()
         cursor.execute(sql_query)
