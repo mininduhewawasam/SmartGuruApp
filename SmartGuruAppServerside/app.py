@@ -67,7 +67,7 @@ def login():
     return login.user_login(data)
 
 
-@app.route('/register', methods=['POST'])
+@app.route('/signup', methods=['POST'])
 def user_register():
     data = request.data
     return register.register_user(data)
