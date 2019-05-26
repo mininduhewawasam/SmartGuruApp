@@ -8,8 +8,8 @@ recQuizList2 = []
 sentjson = json
 
 
+def sendQuestions(user_id):
 
-def sendQuestions():
     recQuizList2.clear()
     recQuizList.clear()
     try:
@@ -24,7 +24,7 @@ def sendQuestions():
         #                                           user='root',
         #                                           password='')
 
-        sql_select_Query = "SELECT questionID FROM sessionsdata WHERE userID=1 ORDER BY sessionDataID  DESC LIMIT 10"
+        sql_select_Query = "SELECT questionID FROM sessionsdata WHERE userID='" + user_id + "' ORDER BY sessionDataID  DESC LIMIT 10"
         cursor1 = mySQLconnection.cursor()
         cursor1.execute(sql_select_Query)
         records = cursor1.fetchall()
@@ -71,7 +71,6 @@ def sendQuestions():
 
     return json.dumps(recQuizList2)
 
-sendQuestions()
 
 
 
