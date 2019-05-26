@@ -4,7 +4,7 @@ from googleapiclient.errors import HttpError
 import json
 import mysql.connector
 
-def vediolinks():
+def vediolinks(user_id):
 
 
         mySQLconnection = mysql.connector.connect(
@@ -14,8 +14,7 @@ def vediolinks():
             database="u2oI1tyJuT"
         )
 
-
-        sql_select_Query = "SELECT QuestionTopic FROM (SELECT * FROM sessionsdata WHERE userID=1 ORDER BY sessiondataID DESC LIMIT 20) as sessionsdata GROUP BY QuestionTopic HAVING COUNT(sessiondataID) > 3"
+        sql_select_Query = "SELECT QuestionTopic FROM (SELECT * FROM sessionsdata WHERE userID='" + user_id + "' ORDER BY sessiondataID DESC LIMIT 20) as sessionsdata GROUP BY QuestionTopic HAVING COUNT(sessiondataID) > 3"
          #get the most duplicate topic that users give the wrong answers from the database
         cursor = mySQLconnection.cursor()
 
