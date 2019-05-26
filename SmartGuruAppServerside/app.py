@@ -15,7 +15,7 @@ import leaderboard
 import edit_profile as profile
 
 
-app = Flask(__name__)
+application = app = Flask(__name__)
 
 
 @app.route('/youtubelinks/<string:user_id>')
@@ -62,7 +62,7 @@ def showUsers():
 
 
 @app.route('/login', methods=['POST'])
-def login():
+def login_user():
     data = request.data
     return login.user_login(data)
 
