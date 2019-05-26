@@ -43,7 +43,7 @@ def get_questions(lesson, level):
     return lesson_quiz_generator.get_questions(lesson, level)
 
 
-@app.route('/performance/<int:user_id>', methods=['GET'])
+@app.route('/performance/<string:user_id>', methods=['GET'])
 def get_performance(user_id):
     return analyzer.calculate_performance(user_id)
 
