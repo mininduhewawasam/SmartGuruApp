@@ -24,7 +24,6 @@ def user_login(data):
         return json.dumps({"status": "User Doesn't Exist"})
     else:
         if password == (records[0][3]):
-            session['user'] = username
             return json.dumps({"status": "Access Allowed", "userID": records[0][0], "userType": records[0][4]})
         else:
             return json.dumps({"status": "Incorrect Password"})
